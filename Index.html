@@ -1,1 +1,176 @@
-<h1>Hello from Streamcool Codespace!</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Year Countdown</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #000;
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #0d0d0d 0%, #000000 100%);
+        }
+        
+        .container {
+            max-width: 800px;
+            width: 100%;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 30px;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            color: #f5f5f5;
+        }
+        
+        .countdown {
+            font-family: 'Courier New', monospace;
+            font-size: 5.5rem;
+            font-weight: 700;
+            margin: 40px 0;
+            padding: 30px;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            border: 1px solid #333;
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.05);
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+        }
+        
+        .label {
+            display: flex;
+            justify-content: space-between;
+            max-width: 700px;
+            margin: 0 auto 50px auto;
+            color: #ccc;
+        }
+        
+        .label span {
+            flex: 1;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .message {
+            margin-top: 40px;
+            font-size: 1.5rem;
+            opacity: 0.9;
+            line-height: 1.6;
+            max-width: 600px;
+        }
+        
+        .highlight {
+            color: #fff;
+            font-weight: 600;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .countdown {
+                font-size: 3.5rem;
+                padding: 20px;
+            }
+            
+            .label span {
+                font-size: 0.8rem;
+            }
+            
+            .message {
+                font-size: 1.2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.7rem;
+            }
+            
+            .countdown {
+                font-size: 2.8rem;
+                padding: 15px;
+            }
+            
+            .label {
+                margin-bottom: 30px;
+            }
+            
+            .label span {
+                font-size: 0.7rem;
+                letter-spacing: 1px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Countdown to New Year</h1>
+        
+        <div class="countdown" id="countdown">104d 23h 59m 59s</div>
+        
+        <div class="label">
+            <span>Days</span>
+            <span>Hours</span>
+            <span>Minutes</span>
+            <span>Seconds</span>
+        </div>
+        
+        <div class="message">
+            Counting down to <span class="highlight">January 1st</span> – a time for new beginnings, fresh starts, and renewed possibilities.
+        </div>
+    </div>
+
+    <script>
+        function updateCountdown() {
+            // Get current date and next January 1st
+            const now = new Date();
+            const currentYear = now.getFullYear();
+            const nextYear = currentYear + 1;
+            const targetDate = new Date(nextYear, 0, 1); // January is month 0
+            
+            // Calculate the difference in milliseconds
+            const diff = targetDate - now;
+            
+            // Calculate days, hours, minutes, seconds
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            // Format with leading zeros if needed
+            const formattedDays = days.toString();
+            const formattedHours = hours.toString().padStart(2, '0');
+            const formattedMinutes = minutes.toString().padStart(2, '0');
+            const formattedSeconds = seconds.toString().padStart(2, '0');
+            
+            // Update the countdown display
+            document.getElementById('countdown').textContent = 
+                `${formattedDays}d ${formattedHours}h ${formattedMinutes}m ${formattedSeconds}s`;
+        }
+        
+        // Initial update
+        updateCountdown();
+        
+        // Update every second
+        setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>
